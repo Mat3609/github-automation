@@ -12,6 +12,7 @@ public class UserCreator {
                 TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
     }
 
+
     public static User withEmptyUsername(){
         return new User("", TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
     }

@@ -42,6 +42,11 @@ public class MainPage extends AbstractPage
 
 	public String getLoggedInUserName()
 	{
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		WebElement linkLoggedInUser = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
 				.until(ExpectedConditions.presenceOfElementLocated(linkLoggedInUserLocator));
 		return linkLoggedInUser.getAttribute("content");

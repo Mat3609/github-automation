@@ -9,13 +9,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import sun.text.resources.ext.FormatData_es_UY;
+
+import java.time.Duration;
 
 public class CreateNewRepositoryPage extends AbstractPage
 {
 	private final String BASE_URL = "http://www.github.com/new";
 	private final Logger logger = LogManager.getRootLogger();
 
-	@FindBy(id = "repository_name")
+	@FindBy(xpath = "//*[@id='repository_name']")
 	private WebElement inputRepositoryName;
 
 	@FindBy(id = "repository_description")
@@ -26,7 +29,7 @@ public class CreateNewRepositoryPage extends AbstractPage
 
 	private final By labelEmptyRepoSetupOptionLocator = By.xpath("//h3/strong[text()='Quick setup']");
 
-	@FindBy(xpath = "//a[@data-pjax='#js-repo-pjax-container']")
+	@FindBy(xpath = "//a[@data-pjax='#repo-content-pjax-container']")
 	private WebElement linkCurrentRepository;
 
 	public CreateNewRepositoryPage(WebDriver driver)
@@ -44,8 +47,15 @@ public class CreateNewRepositoryPage extends AbstractPage
 
 	public CreateNewRepositoryPage createNewRepository(String repositoryName, String repositoryDescription)
 	{
+		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='repository_name']")));
 		inputRepositoryName.sendKeys(repositoryName);
 		inputRepositoryDescription.sendKeys(repositoryDescription);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		buttonCreate.click();
 		logger.info("Created repository with name: [" + repositoryName +
 				"[ and description: [" + repositoryDescription + "]");
@@ -54,6 +64,7 @@ public class CreateNewRepositoryPage extends AbstractPage
 
 	public String getCurrentRepositoryName()
 	{
+
 		return linkCurrentRepository.getText();
 	}
 

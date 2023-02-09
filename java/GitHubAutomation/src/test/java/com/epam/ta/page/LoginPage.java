@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
 
 public class LoginPage extends AbstractPage
 {
@@ -46,7 +47,5 @@ public class LoginPage extends AbstractPage
 		logger.info("Login performed");
 		return new MainPage(driver);
 	}
-
-
 
 }

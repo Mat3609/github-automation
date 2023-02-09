@@ -27,7 +27,8 @@ public class RepositoryManagementTests extends CommonConditions {
                 .invokeNewRepositoryCreation()
                 .createNewRepository(expectedRepositoryName, REPOSITORY_DESCRIPTION)
                 .getCurrentRepositoryName();
-
+        System.out.println(createdRepositoryName);
+        System.out.println(expectedRepositoryName);
         assertThat(createdRepositoryName, is(equalTo(expectedRepositoryName)));
     }
 
